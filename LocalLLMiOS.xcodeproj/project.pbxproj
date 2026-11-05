@@ -1,0 +1,379 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		46C61BB1BF45355AEF3DB5A2 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA410C833E9FA3E2A604C30 /* AppState.swift */; };
+		5C84E3EA038C3ED4DD2D4705 /* LocalLLMiOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4919EA2A0D7D75A95CBE71C /* LocalLLMiOSApp.swift */; };
+		36469F9038EEF4A6E56EB821 /* EmbeddingEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4E7E3FE43DD1CF839E78EDE /* EmbeddingEngine.swift */; };
+		47021847BA8B25B2DB59F8C1 /* LlamaBackend.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9D7BB099DA4CDF0EF7D2BAB /* LlamaBackend.swift */; };
+		36CE07D555BF957FD1867303 /* LlamaEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCC8867BD5511BC8F6C8DE8 /* LlamaEngine.swift */; };
+		EE9C9B84A3C3B78530585E57 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F56BE7464AB8F230BDBDD54 /* AppSettings.swift */; };
+		45DA209BC297B41C2BE4B747 /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 022108B5018A324BF647F2E1 /* Book.swift */; };
+		F83778407C75AACB66BE6897 /* BookParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF4B94482307A466F020A8AE /* BookParser.swift */; };
+		D7024EF1DFDF8452153F2D50 /* ModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252CE64A74A2F9BFF99D6ACB /* ModelManager.swift */; };
+		103E14F81E89647791F8330F /* RAGPipeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D3D3ED548CA2872C5D447CA /* RAGPipeline.swift */; };
+		57ED822C38E59EFFA78BE7F5 /* TextChunker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A3D88E475DB0F314ABEAF0E /* TextChunker.swift */; };
+		E38FD328320EE28B96E3DDF9 /* VectorStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AEBCA4D9798BC5F39E0EE85 /* VectorStore.swift */; };
+		F4280AC3B627F14EC4C6A22C /* ZipReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3749C399C39D28D797676B96 /* ZipReader.swift */; };
+		1023BE74E5F09EA2B65F557A /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D733F3FC1539B49420C61264 /* ChatView.swift */; };
+		DD1C0AD3E120FCE4F9396420 /* CitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8216C2962810DE2AF7A1E72B /* CitationView.swift */; };
+		BD33737C0CC0D5652F24CDA5 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A509E040A5920B8475BAF321 /* LibraryView.swift */; };
+		728B9889CFB00FB1C66A7C93 /* ModelSetupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DAFFE34DFFD77B96719DCF /* ModelSetupView.swift */; };
+		3A939E795D96D758FF99B739 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DE88C0B3F1889263BBD1630 /* RootView.swift */; };
+		AFC32F869D414F5C3C158C1E /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3DBD1E81834DBB222FAF7F6F /* SettingsView.swift */; };
+		E944DB7FF2C1D2379FC9DD78 /* llama.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC0D85582A901C7D6F8432FA /* llama.xcframework */; };
+		D5AE41F85F60F2A59B1D888A /* llama.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FC0D85582A901C7D6F8432FA /* llama.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F0AB04EE052351C80F3286E9 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				D5AE41F85F60F2A59B1D888A /* llama.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		6DA410C833E9FA3E2A604C30 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		D4919EA2A0D7D75A95CBE71C /* LocalLLMiOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalLLMiOSApp.swift; sourceTree = "<group>"; };
+		C4E7E3FE43DD1CF839E78EDE /* EmbeddingEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbeddingEngine.swift; sourceTree = "<group>"; };
+		A9D7BB099DA4CDF0EF7D2BAB /* LlamaBackend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LlamaBackend.swift; sourceTree = "<group>"; };
+		8BCC8867BD5511BC8F6C8DE8 /* LlamaEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LlamaEngine.swift; sourceTree = "<group>"; };
+		5F56BE7464AB8F230BDBDD54 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		022108B5018A324BF647F2E1 /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		BF4B94482307A466F020A8AE /* BookParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookParser.swift; sourceTree = "<group>"; };
+		252CE64A74A2F9BFF99D6ACB /* ModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManager.swift; sourceTree = "<group>"; };
+		9D3D3ED548CA2872C5D447CA /* RAGPipeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RAGPipeline.swift; sourceTree = "<group>"; };
+		6A3D88E475DB0F314ABEAF0E /* TextChunker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextChunker.swift; sourceTree = "<group>"; };
+		5AEBCA4D9798BC5F39E0EE85 /* VectorStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VectorStore.swift; sourceTree = "<group>"; };
+		3749C399C39D28D797676B96 /* ZipReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZipReader.swift; sourceTree = "<group>"; };
+		D733F3FC1539B49420C61264 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
+		8216C2962810DE2AF7A1E72B /* CitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitationView.swift; sourceTree = "<group>"; };
+		A509E040A5920B8475BAF321 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		34DAFFE34DFFD77B96719DCF /* ModelSetupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSetupView.swift; sourceTree = "<group>"; };
+		4DE88C0B3F1889263BBD1630 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		3DBD1E81834DBB222FAF7F6F /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		B7C80CBD0F428079BF3D08CC /* Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bridging-Header.h; sourceTree = "<group>"; };
+		4092641AFB203E042A223681 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC0D85582A901C7D6F8432FA /* llama.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = llama.xcframework; path = Vendor/build-apple/llama.xcframework; sourceTree = SOURCE_ROOT; };
+		43CD912F8D156FBB2E537C38 /* LocalLLMiOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalLLMiOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CF5BDB0BEAFE176F9629192A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E944DB7FF2C1D2379FC9DD78 /* llama.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ADCF10F76EBF2A74473E9DC4 = {
+			isa = PBXGroup;
+			children = (
+				6CEE98541C91B73CF8F41C35 /* LocalLLMiOS */,
+				ED2F3B048716C9DC7573911C /* Frameworks */,
+				00C45FD35CB0F9C5F764F070 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		6CEE98541C91B73CF8F41C35 /* LocalLLMiOS */ = {
+			isa = PBXGroup;
+			children = (
+				045F0DCAED0EC0BDEA93DF29 /* App */,
+				6340298683C9D93C749D48B1 /* Engine */,
+				523A0DEEF999FD78EF6C766F /* Model */,
+				01CDC0C8AE9725D0E7ECD2CD /* RAG */,
+				53F7233AC9697CA243941D31 /* Views */,
+			);
+			path = LocalLLMiOS;
+			sourceTree = "<group>";
+		};
+		045F0DCAED0EC0BDEA93DF29 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				4092641AFB203E042A223681 /* Info.plist */,
+				B7C80CBD0F428079BF3D08CC /* Bridging-Header.h */,
+				6DA410C833E9FA3E2A604C30 /* AppState.swift */,
+				D4919EA2A0D7D75A95CBE71C /* LocalLLMiOSApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		6340298683C9D93C749D48B1 /* Engine */ = {
+			isa = PBXGroup;
+			children = (
+				C4E7E3FE43DD1CF839E78EDE /* EmbeddingEngine.swift */,
+				A9D7BB099DA4CDF0EF7D2BAB /* LlamaBackend.swift */,
+				8BCC8867BD5511BC8F6C8DE8 /* LlamaEngine.swift */,
+			);
+			path = Engine;
+			sourceTree = "<group>";
+		};
+		523A0DEEF999FD78EF6C766F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5F56BE7464AB8F230BDBDD54 /* AppSettings.swift */,
+				022108B5018A324BF647F2E1 /* Book.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		01CDC0C8AE9725D0E7ECD2CD /* RAG */ = {
+			isa = PBXGroup;
+			children = (
+				BF4B94482307A466F020A8AE /* BookParser.swift */,
+				252CE64A74A2F9BFF99D6ACB /* ModelManager.swift */,
+				9D3D3ED548CA2872C5D447CA /* RAGPipeline.swift */,
+				6A3D88E475DB0F314ABEAF0E /* TextChunker.swift */,
+				5AEBCA4D9798BC5F39E0EE85 /* VectorStore.swift */,
+				3749C399C39D28D797676B96 /* ZipReader.swift */,
+			);
+			path = RAG;
+			sourceTree = "<group>";
+		};
+		53F7233AC9697CA243941D31 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D733F3FC1539B49420C61264 /* ChatView.swift */,
+				8216C2962810DE2AF7A1E72B /* CitationView.swift */,
+				A509E040A5920B8475BAF321 /* LibraryView.swift */,
+				34DAFFE34DFFD77B96719DCF /* ModelSetupView.swift */,
+				4DE88C0B3F1889263BBD1630 /* RootView.swift */,
+				3DBD1E81834DBB222FAF7F6F /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		ED2F3B048716C9DC7573911C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FC0D85582A901C7D6F8432FA /* llama.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		00C45FD35CB0F9C5F764F070 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				43CD912F8D156FBB2E537C38 /* LocalLLMiOS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0E8A3AD980EC179856012B7E /* LocalLLMiOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED59008E052259AC151C5C09 /* Build configuration list for PBXNativeTarget "LocalLLMiOS" */;
+			buildPhases = (
+				1CDF2F71A52B082132B04DFF /* Sources */,
+				CF5BDB0BEAFE176F9629192A /* Frameworks */,
+				F0AB04EE052351C80F3286E9 /* Embed Frameworks */,
+				C02F1309AF4906C92F1EAD44 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LocalLLMiOS;
+			productName = LocalLLMiOS;
+			productReference = 43CD912F8D156FBB2E537C38 /* LocalLLMiOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		98F54143AB4E86B28C3AFEE0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = { 0E8A3AD980EC179856012B7E = { CreatedOnToolsVersion = 16.0; }; };
+			};
+			buildConfigurationList = 7198B1A165AEE41CD0DEE38D /* Build configuration list for PBXProject "LocalLLMiOS" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (en, Base, "zh-Hans");
+			mainGroup = ADCF10F76EBF2A74473E9DC4;
+			productRefGroup = 00C45FD35CB0F9C5F764F070 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0E8A3AD980EC179856012B7E /* LocalLLMiOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C02F1309AF4906C92F1EAD44 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1CDF2F71A52B082132B04DFF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46C61BB1BF45355AEF3DB5A2 /* AppState.swift in Sources */,
+				5C84E3EA038C3ED4DD2D4705 /* LocalLLMiOSApp.swift in Sources */,
+				36469F9038EEF4A6E56EB821 /* EmbeddingEngine.swift in Sources */,
+				47021847BA8B25B2DB59F8C1 /* LlamaBackend.swift in Sources */,
+				36CE07D555BF957FD1867303 /* LlamaEngine.swift in Sources */,
+				EE9C9B84A3C3B78530585E57 /* AppSettings.swift in Sources */,
+				45DA209BC297B41C2BE4B747 /* Book.swift in Sources */,
+				F83778407C75AACB66BE6897 /* BookParser.swift in Sources */,
+				D7024EF1DFDF8452153F2D50 /* ModelManager.swift in Sources */,
+				103E14F81E89647791F8330F /* RAGPipeline.swift in Sources */,
+				57ED822C38E59EFFA78BE7F5 /* TextChunker.swift in Sources */,
+				E38FD328320EE28B96E3DDF9 /* VectorStore.swift in Sources */,
+				F4280AC3B627F14EC4C6A22C /* ZipReader.swift in Sources */,
+				1023BE74E5F09EA2B65F557A /* ChatView.swift in Sources */,
+				DD1C0AD3E120FCE4F9396420 /* CitationView.swift in Sources */,
+				BD33737C0CC0D5652F24CDA5 /* LibraryView.swift in Sources */,
+				728B9889CFB00FB1C66A7C93 /* ModelSetupView.swift in Sources */,
+				3A939E795D96D758FF99B739 /* RootView.swift in Sources */,
+				AFC32F869D414F5C3C158C1E /* SettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A828B175DB041ECF57096C60 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				GCC_PREPROCESSOR_DEFINITIONS = ("DEBUG=1", "$(inherited)");
+				ONLY_ACTIVE_ARCH = YES;
+			};
+			name = Debug;
+		};
+		CCADD202455C42E4C8E9BCAF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		66648E47351095FC726E86E1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = LocalLLMiOS/App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks");
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = ("$(inherited)", "-lz", "-lsqlite3", "-lc++", "-ObjC");
+				PRODUCT_BUNDLE_IDENTIFIER = com.idea2real.LocalLLMiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				FRAMEWORK_SEARCH_PATHS = ("$(inherited)", "$(PROJECT_DIR)/Vendor/build-apple");
+				HEADER_SEARCH_PATHS = ("$(inherited)");
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = LocalLLMiOS/App/Bridging-Header.h;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+			};
+			name = Debug;
+		};
+		B1CFD82E4BB1C758CFCA5F0B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = LocalLLMiOS/App/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = ("$(inherited)", "@executable_path/Frameworks");
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = ("$(inherited)", "-lz", "-lsqlite3", "-lc++", "-ObjC");
+				PRODUCT_BUNDLE_IDENTIFIER = com.idea2real.LocalLLMiOS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				FRAMEWORK_SEARCH_PATHS = ("$(inherited)", "$(PROJECT_DIR)/Vendor/build-apple");
+				HEADER_SEARCH_PATHS = ("$(inherited)");
+				SDKROOT = iphoneos;
+				SUPPORTED_PLATFORMS = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = LocalLLMiOS/App/Bridging-Header.h;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7198B1A165AEE41CD0DEE38D /* Build configuration list for PBXProject "LocalLLMiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A828B175DB041ECF57096C60 /* Debug */,
+				CCADD202455C42E4C8E9BCAF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED59008E052259AC151C5C09 /* Build configuration list for PBXNativeTarget "LocalLLMiOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				66648E47351095FC726E86E1 /* Debug */,
+				B1CFD82E4BB1C758CFCA5F0B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 98F54143AB4E86B28C3AFEE0 /* Project object */;
+}
