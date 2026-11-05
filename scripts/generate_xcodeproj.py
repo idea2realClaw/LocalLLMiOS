@@ -311,7 +311,7 @@ def main() -> None:
         'FRAMEWORK_SEARCH_PATHS = ("$(inherited)", "$(PROJECT_DIR)/Vendor/build-apple");',
         'HEADER_SEARCH_PATHS = ("$(inherited)");',
         "SDKROOT = iphoneos;",
-        "SUPPORTED_PLATFORMS = iphoneos;",
+        'SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";',
         f"SWIFT_OBJC_BRIDGING_HEADER = {BRIDGING_REL};",
         "SWIFT_VERSION = 5.0;",
         'TARGETED_DEVICE_FAMILY = "1,2";',

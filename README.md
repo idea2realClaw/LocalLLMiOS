@@ -33,7 +33,7 @@
 | `LocalLLMiOS/RAG/` | `BookParser`、`ZipReader`、`TextChunker`、`VectorStore`、`RAGPipeline`、`ModelManager` |
 | `LocalLLMiOS/Views/` | 书库 / 章节树、问答、引用溯源、模型管理、设置 |
 | `LocalLLMiOS/App/` | `@main`、`AppState`、`Info.plist`、Bridging-Header |
-| `scripts/` | 依赖下载、局域网模型分发、Xcode 工程生成 |
+| `scripts/` | 依赖下载、局域网模型分发、Xcode 工程生成、模拟器 slice 补编 |
 | `Vendor/`、`Models/` | 预编译框架与 GGUF（被 `.gitignore` 忽略，用 `setup.sh` 获取） |
 
 ---
@@ -62,21 +62,33 @@ open LocalLLMiOS.xcodeproj
 ```
 
 - **需要完整 Xcode**（CommandLineTools 不够，因为要 iOS SDK 与代码签名）。本机已装 **Xcode 27.2** 并把 `xcode-select` 指向它，iOS 27.2 / Simulator 27.2 SDK 均已就绪。
-- 在 target 的 *Signing & Capabilities* 里选自己的 Development Team。
-- **必须选真机**：官方 XCFramework 只含 `ios-arm64`（真机）与 macOS slice，**没有 iOS 模拟器 slice**。工程已把 `SUPPORTED_PLATFORMS` 限定为 `iphoneos`。
+- 在 target 的 *Signing & Capabilities* 里选自己的 Development Team（真机调试需要；模拟器可免签名）。
+- **真机与模拟器都能编译运行**：官方 XCFramework 只含 `ios-arm64`（真机）与 macOS slice，缺 simulator slice；本机已用 `scripts/enable_simulator.sh` 补编 `ios-arm64_x86_64-simulator` 并合成三 slice 框架，工程 `SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"`。换机器后重跑一次该脚本即可。
 - 最低系统 iOS 16.4（与框架一致），`SWIFT_VERSION = 5.0`。
 
 **命令行编译（免签名，用于验证）**
 
 ```bash
+# 真机
 xcodebuild -project LocalLLMiOS.xcodeproj -target LocalLLMiOS \
   -configuration Debug -sdk iphoneos \
+  CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO build
+
+# 模拟器（需先执行 enable_simulator.sh 补 slice）
+xcodebuild -project LocalLLMiOS.xcodeproj -target LocalLLMiOS \
+  -configuration Debug -sdk iphonesimulator \
   CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO build
 ```
 
 产物默认落在 `build/`（已忽略）。若在受限沙箱或 CI 里编译，`swift-plugin-server` 可能因无法嵌套沙箱而报 `SwiftUIMacros.StateMacro could not be found`，追加 `OTHER_SWIFT_FLAGS='$(inherited) -disable-sandbox'` 即可；Xcode GUI 正常编译不需要它。
 
-> 如果要在模拟器上跑：在装了 Xcode 的机器上 `git clone https://github.com/ggml-org/llama.cpp`，执行 `./build-xcframework.sh ios-sim ios-device`，把产出的 `build-apple/llama.xcframework` 覆盖到 `Vendor/build-apple/`，再把工程里的 `SUPPORTED_PLATFORMS` 放宽。
+### 补编模拟器 slice（换机器时执行一次）
+
+```bash
+bash scripts/enable_simulator.sh
+```
+
+脚本把 CMake 3.31.12 与 llama.cpp `b12119` 源码下载到 `/tmp`（纯解压，不装系统、不需要 Homebrew），用官方 `build-xcframework.sh ios-sim` 编出模拟器 slice，备份官方框架为 `Vendor/build-apple/llama.xcframework.official`，再合成为三 slice 的 `llama.xcframework`。实测编译约 2 分钟（8 核）。已编好源码时可加 `--merge-only` 只做合成；`LLAMA_SRC_DIR` / `LLAMA_SIM_FRAMEWORK` 可指定已有产物。只跑真机的话，`setup.sh` 下载的官方框架已足够。
 
 ### 3. 把两个 GGUF 送进手机（三选一）
 
@@ -116,9 +128,9 @@ App → 书库左上角「模型」→ 把地址（去掉文件名，以 `/` 结
 
 ---
 
-## 四、实测验证（llama.cpp b12119 / macOS arm64）
+## 四、实测验证（llama.cpp b12119 / Xcode 27.2 / macOS arm64）
 
-验证分两层：**Xcode 27.2 真机 SDK 编译**（2026-11-06 完成）与 **同版本 macOS 二进制的真实推理**（验证模型与 RAG 链路）。真机安装调试仍需 Development Team 与实体 iPhone，本环境无法代替。
+验证分三层：**Xcode 27.2 真机 / 模拟器 SDK 编译 + 模拟器实机启动**（2026-11-06 完成）、**同版本 macOS 二进制的真实推理**（验证模型与 RAG 链路）。真机安装调试仍需 Development Team 与实体 iPhone，本环境无法代替。
 
 | 验证项 | 结果 |
 |---|---|
@@ -132,7 +144,10 @@ App → 书库左上角「模型」→ 把地址（去掉文件名，以 `/` 结
 | Swift 源码 | 19 个文件全部通过 `swiftc -parse` 语法解析 |
 | Xcode 工程 | `plutil -lint` 通过，65 个对象、无悬空 ID 引用 |
 | Xcode 真机 SDK 编译 | `xcodebuild -sdk iphoneos` **BUILD SUCCEEDED**（Xcode 27.2 / iOS 27.2） |
-| 编译产物 | arm64 Mach-O，`Frameworks/llama.framework` 已嵌入，`@rpath` 依赖正确，MinimumOSVersion 16.4 |
+| 模拟器 slice 补编 | llama.cpp `b12119` 源码 + CMake 3.31.12，官方 `build-xcframework.sh ios-sim` 编出 `ios-arm64_x86_64-simulator`（arm64+x86_64），与官方真机 / macOS slice 合成三 slice |
+| Xcode 模拟器 SDK 编译 | `xcodebuild -sdk iphonesimulator` **BUILD SUCCEEDED**，产物 x86_64+arm64 双架构 |
+| 模拟器实机启动 | iOS 26.5 / iPhone 17 Pro 模拟器安装启动成功（pid 59687，3 秒后仍存活、无崩溃报告），SwiftUI 三栏界面正常渲染 |
+| 编译产物 | 真机 arm64、模拟器双架构 Mach-O；`Frameworks/llama.framework` 已嵌入，`@rpath` 依赖正确，MinimumOSVersion 16.4 |
 | 编译期才发现并修复 | `llama_sampler` 指针类型（b12119 导入为 `UnsafeMutablePointer<llama_sampler>`）、`vDSP_vsmul` 的 `scale` 需为 `var` —— 静态语法解析查不出这两类错误 |
 
 工程文件由 `scripts/generate_xcodeproj.py` 生成（自动扫描源码、路径哈希生成稳定 ID），源码增删后重跑即可：
@@ -161,7 +176,7 @@ python3 scripts/generate_xcodeproj.py
 ## 六、已知限制
 
 1. **真机运行仍需签名与设备**：编译链接已在 Xcode 27.2 + iOS 27.2 SDK 下验证通过，但真机安装/调试需要 Development Team 和一台 8GB 内存的 iPhone。
-2. **不支持 iOS 模拟器**（官方 XCFramework 缺 simulator slice），见上文重建方法。
+2. **模拟器 slice 需自行补编**：官方 release 框架不含 simulator slice，换机器执行一次 `scripts/enable_simulator.sh` 即可；工程已放宽 `SUPPORTED_PLATFORMS`。模拟器用 CPU 跑 4B 模型很慢，建议只做 UI / 链路调试，真问答仍用真机。
 3. **扫描版 PDF 无文本层**会报「没有可提取的文本」，需先 OCR。
 4. 首次导入一本长书要逐块跑 bge，属于正常耗时；导入过程中不要切到后台太久。
 5. 2.6 GB 模型在 6 GB 以下内存的 iPhone 上可能被系统杀掉进程，属 iOS jetsam 限制。
