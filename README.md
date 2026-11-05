@@ -61,10 +61,20 @@ bash scripts/setup.sh
 open LocalLLMiOS.xcodeproj
 ```
 
-- **需要完整 Xcode**（CommandLineTools 不够，因为要 iOS SDK 与代码签名）。
+- **需要完整 Xcode**（CommandLineTools 不够，因为要 iOS SDK 与代码签名）。本机已装 **Xcode 27.2** 并把 `xcode-select` 指向它，iOS 27.2 / Simulator 27.2 SDK 均已就绪。
 - 在 target 的 *Signing & Capabilities* 里选自己的 Development Team。
 - **必须选真机**：官方 XCFramework 只含 `ios-arm64`（真机）与 macOS slice，**没有 iOS 模拟器 slice**。工程已把 `SUPPORTED_PLATFORMS` 限定为 `iphoneos`。
 - 最低系统 iOS 16.4（与框架一致），`SWIFT_VERSION = 5.0`。
+
+**命令行编译（免签名，用于验证）**
+
+```bash
+xcodebuild -project LocalLLMiOS.xcodeproj -target LocalLLMiOS \
+  -configuration Debug -sdk iphoneos \
+  CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO build
+```
+
+产物默认落在 `build/`（已忽略）。若在受限沙箱或 CI 里编译，`swift-plugin-server` 可能因无法嵌套沙箱而报 `SwiftUIMacros.StateMacro could not be found`，追加 `OTHER_SWIFT_FLAGS='$(inherited) -disable-sandbox'` 即可；Xcode GUI 正常编译不需要它。
 
 > 如果要在模拟器上跑：在装了 Xcode 的机器上 `git clone https://github.com/ggml-org/llama.cpp`，执行 `./build-xcframework.sh ios-sim ios-device`，把产出的 `build-apple/llama.xcframework` 覆盖到 `Vendor/build-apple/`，再把工程里的 `SUPPORTED_PLATFORMS` 放宽。
 
@@ -108,7 +118,7 @@ App → 书库左上角「模型」→ 把地址（去掉文件名，以 `/` 结
 
 ## 四、实测验证（llama.cpp b12119 / macOS arm64）
 
-本机没有完整 Xcode 与 iOS SDK，**iOS App 本身未做真机编译**（这是当前唯一未验证环节）。但同版本 macOS 二进制已对两个 GGUF 与 RAG 链路做了真实推理验证：
+验证分两层：**Xcode 27.2 真机 SDK 编译**（2026-11-06 完成）与 **同版本 macOS 二进制的真实推理**（验证模型与 RAG 链路）。真机安装调试仍需 Development Team 与实体 iPhone，本环境无法代替。
 
 | 验证项 | 结果 |
 |---|---|
@@ -121,6 +131,9 @@ App → 书库左上角「模型」→ 把地址（去掉文件名，以 `/` 结
 | 端到端 RAG | 4 个片段中「检索」相关片段相似度 0.6399 排第一；答案为「检索时，需先将问题加上中文检索指令并进行编码，随后在向量库中执行余弦相似度检索以获取最相关片段 [1]。最终系统会取 Top-5 最相关的片段 [1]。」——中文、带引用、无思考过程 ✅ |
 | Swift 源码 | 19 个文件全部通过 `swiftc -parse` 语法解析 |
 | Xcode 工程 | `plutil -lint` 通过，65 个对象、无悬空 ID 引用 |
+| Xcode 真机 SDK 编译 | `xcodebuild -sdk iphoneos` **BUILD SUCCEEDED**（Xcode 27.2 / iOS 27.2） |
+| 编译产物 | arm64 Mach-O，`Frameworks/llama.framework` 已嵌入，`@rpath` 依赖正确，MinimumOSVersion 16.4 |
+| 编译期才发现并修复 | `llama_sampler` 指针类型（b12119 导入为 `UnsafeMutablePointer<llama_sampler>`）、`vDSP_vsmul` 的 `scale` 需为 `var` —— 静态语法解析查不出这两类错误 |
 
 工程文件由 `scripts/generate_xcodeproj.py` 生成（自动扫描源码、路径哈希生成稳定 ID），源码增删后重跑即可：
 
@@ -147,7 +160,7 @@ python3 scripts/generate_xcodeproj.py
 
 ## 六、已知限制
 
-1. **需要装了完整 Xcode 的 Mac 与真机**；本机只有 CommandLineTools，因此未做 `xcodebuild` 与真机运行验证。
+1. **真机运行仍需签名与设备**：编译链接已在 Xcode 27.2 + iOS 27.2 SDK 下验证通过，但真机安装/调试需要 Development Team 和一台 8GB 内存的 iPhone。
 2. **不支持 iOS 模拟器**（官方 XCFramework 缺 simulator slice），见上文重建方法。
 3. **扫描版 PDF 无文本层**会报「没有可提取的文本」，需先 OCR。
 4. 首次导入一本长书要逐块跑 bge，属于正常耗时；导入过程中不要切到后台太久。

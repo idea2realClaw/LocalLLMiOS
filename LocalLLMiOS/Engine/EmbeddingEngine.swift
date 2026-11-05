@@ -130,7 +130,7 @@ final class EmbeddingEngine {
         guard !v.isEmpty else { return }
         var sum: Float = 0
         vDSP_svesq(v, 1, &sum, vDSP_Length(v.count))
-        let scale: Float = 1.0 / sqrtf(max(sum, 1e-12))
+        var scale: Float = 1.0 / sqrtf(max(sum, 1e-12))
         vDSP_vsmul(v, 1, &scale, &v, 1, vDSP_Length(v.count))
     }
 

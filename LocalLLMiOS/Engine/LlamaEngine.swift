@@ -8,7 +8,7 @@ final class LlamaEngine {
     private var model: OpaquePointer?
     private var ctx: OpaquePointer?
     private var vocab: OpaquePointer?
-    private var sampler: OpaquePointer?
+    private var sampler: UnsafeMutablePointer<llama_sampler>?
 
     private let lock = NSLock()
     private var cancelled = false
